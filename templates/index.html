@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Log Project</title>
+        <style>
+            button{
+                padding: 15px;
+                background-color: lightgray;
+                border: none;
+                border-radius: 1000px;
+                margin: 10px;
+                font-weight: bold;
+            }
+            
+            button:active{
+                background-color: lightseagreen;
+            }
+        </style>
+    </head>
+    <script>
+        function request(type) {
+            let url = "/" + type;
+             fetch(url)
+                 .then(response => {
+                     if (!response.ok) {
+                         throw new Error('Error en la respuesta de la red');
+                     }
+                     return response.json(); 
+                 })
+                 .then(data => {
+                     console.log('Datos recibidos:', data);
+                 })
+                 .catch(error => {
+                     console.error('Hubo un problema con la petición Fetch:', error);
+                 });
+         } 
+     </script>
+    <body>
+        <h1>Test</h1>
+        <button onclick="request('debug')">Debug</button>
+        <button onclick="request('info')">Info</button>
+        <button onclick="request('warning')">Warning</button>
+        <button onclick="request('error')">Error</button>
+    </body>
+</html>
