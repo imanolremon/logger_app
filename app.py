@@ -7,7 +7,8 @@ app = Flask(__name__)
 
 # Logger
 app_logger = logging.getLogger(__name__)
-logging.basicConfig(filename='log', level=logging.DEBUG, format = "%(asctime)s: %(levelname)s - PID=%(process)d | %(message)s")
+logger_format= "%(asctime)s: %(levelname)s - PID=%(process)d | %(message)s"
+logging.basicConfig(filename='log', level=logging.DEBUG, format = logger_format)
 
 # Disable werkzeug logger to hide startup and HTTP requests
 werkzeug_logger = logging.getLogger("werkzeug")
@@ -15,6 +16,7 @@ werkzeug_logger.disabled = True
 
 # Log Handler (separate logs in files)
 handler = logging.handlers.TimedRotatingFileHandler("log", when="S", interval=5, backupCount=10, encoding=None, delay=False, utc=False, atTime=None)
+handler.setFormatter(logging.Formatter(logger_format))
 app_logger.addHandler(handler)
 
 @app.route("/")
