@@ -13,9 +13,14 @@ app_logger = logging.getLogger(__name__)
 werkzeug_logger = logging.getLogger("werkzeug")
 werkzeug_logger.disabled = True
 
-# Basic format and config
-logger_format = "%(asctime)s: %(levelname)s - PID=%(process)d | %(message)s"
-logging.basicConfig(filename='log', level=logging.DEBUG, format=logger_format)
+# Log Handler (separates logs in files depending on time)
+handler = logging.handlers.TimedRotatingFileHandler("log_v3", when="S", interval=5, backupCount=10, encoding=None, delay=False, utc=False, atTime=None)
+
+# JSON formatter
+logger_format_json = '%(asctime)s %(levelname)s %(process)d %(message)s'
+json_formatter = jsonlogger.JsonFormatter(logger_format_json)
+handler.setFormatter(json_formatter)
+app_logger.addHandler(handler)
 
 @app.route("/")
 def index():

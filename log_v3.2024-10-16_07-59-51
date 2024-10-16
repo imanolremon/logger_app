@@ -1,0 +1,4 @@
+{"asctime": "2024-10-16 07:59:51,250", "levelname": "WARNING", "process": 36483, "message": "Log Warning"}
+{"asctime": "2024-10-16 07:59:51,426", "levelname": "WARNING", "process": 36483, "message": "Log Warning"}
+{"asctime": "2024-10-16 07:59:51,733", "levelname": "WARNING", "process": 36483, "message": "Log Warning"}
+{"asctime": "2024-10-16 07:59:52,747", "levelname": "ERROR", "process": 36483, "message": "Log Error"}

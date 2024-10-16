@@ -13,9 +13,13 @@ app_logger = logging.getLogger(__name__)
 werkzeug_logger = logging.getLogger("werkzeug")
 werkzeug_logger.disabled = True
 
-# Basic format and config
+# Basic format
 logger_format = "%(asctime)s: %(levelname)s - PID=%(process)d | %(message)s"
-logging.basicConfig(filename='log', level=logging.DEBUG, format=logger_format)
+
+# Log Handler (separates logs in files depending on time)
+handler = logging.handlers.TimedRotatingFileHandler("log_v2", when="S", interval=5, backupCount=10, encoding=None, delay=False, utc=False, atTime=None)
+handler.setFormatter(logging.Formatter(logger_format))
+app_logger.addHandler(handler);
 
 @app.route("/")
 def index():
